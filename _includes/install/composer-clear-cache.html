@@ -1,0 +1,10 @@
+<p><a href="http://packages.magento.com/" target="_blank">packages.magento.com</a>にて紹介した変更にはMagetoパッケージにて意図しないエラーを起こすものが含まれていました。</p>
+<p>これは2015年の8/13から8/17の間に<code>composer create-project</code>を使ってMagentoプロジェクトを作成した人<em>のみ</em>影響があります。 
+<p>あるユーザーがインストール中に発生したエラーについて現象を<a href="https://github.com/magento/magento2/issues/1680" target="_blank">GitHub</a> にて報告しました。</p>
+<pre>[UnexpectedValueException]
+The checksum verification of the file failed (downloaded from https://packages.magento.com/_packages/magento_framework-1.0.0-beta.zip)</pre>
+<p>原因は<code>packages.magento.com</code> とローカルの Composer cacheを比べた時のパッケージのコンフリクトです。解決するにはComposer cacheを以下のようにクリアしてください:</p>
+<ol><li>Log in to your Magento server as a user with permissions to run <code>composer</code> in the Magento installation directory.</li>
+<ol><li>MagentoサーバーにMagentoインストレーションディレクトリにて<code>composer</code>のパーミッションを持つユーザーでログインしてください</li>
+	<li><code>cd &lt;your Magento install dir></code></li>
+	<li><code>composer clear-cache</code>を入力</li></ol>
